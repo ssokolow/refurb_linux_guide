@@ -14,30 +14,42 @@
         <link rel="icon" type="image/png" href="/favicon.ico" />
         -->
         <meta name="language" content="en" />
-        <!--<link rel="stylesheet" type="text/css"
-        href="stylesheets/base.css">-->
         <style type="text/css">
-            p, #render {
+            body > div {
                 margin: 1em auto;
                 width: 70em;
                 max-width: 100%;
             }
             #render {
-                height: 50em;
-                max-height: 80%;
+                width: 100%;
+                height: 40em;
             }
-            .gitforked-button {
-                margin: 1em;
+            #git_button {
+                margin: 1ex;
                 float: right;
+                overflow: hidden;
             }
         </style>
+        <script src="js/jquery-1.8.2.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="js/showdown.js" type="text/javascript" charset="utf-8"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $.get('README.md', function(data) {
+                    var converter = new Showdown.converter();
+                    $('#readme').html(converter.makeHtml(data));
+                });
+            });
+        </script>
     </head>
     <body>
-        <p>
-            <a href="https://github.com/ssokolow/refurb_linux_guide" class="gitforked-button gitforked-forks gitforked-watchers">GitHub</a>
-            The following is my <a href="getting_started_with_lubuntu.odt">Getting Started Guide</a> for used PCs I've set up with Lubuntu as rendered by <a href="http://webodf.org/">WebODF</a>. There will probably be a rendering glitch or two compared to <a href="https://www.libreoffice.org/">LibreOffice</a>, but it should give you a good idea of what it looks like.
-        <iframe id="render" src="render.html">
-        <script src="http://gitforked.com/api/1.1/button.js" type="text/javascript"></script>
+        <div>
+            <p class="readme">
+                <iframe id='git_button' src="http://ghbtns.com/github-btn.html?user=ssokolow&amp;repo=refurb_linux_guide&amp;type=fork&amp;count=true"
+                  allowtransparency="true" frameborder="0" scrolling="0" width="110px" height="20px"></iframe>
+                <span id='readme'>Rendering <a href="README.md">README.md</a>... <noscript>or we would be if you have Javascript</noscript></span>
+            </p>
+        </div>
+        <div><iframe id="render" src="render.html"></iframe></div>
     </body>
 </html>
 
